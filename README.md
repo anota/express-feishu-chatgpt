@@ -48,7 +48,7 @@ https://user-images.githubusercontent.com/13283837/217905601-6e1ff237-5275-4deb-
 
 ![image-20230210022322720](https://postimg.aliavv.com/picgo/202302100223839.png)
 
-### 8. 开启权限并配置事件
+### 6. 开启权限并配置事件
 
 访问开放平台页面，开通如下 6 个权限：
 
