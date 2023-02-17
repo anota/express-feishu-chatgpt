@@ -33,7 +33,6 @@ function logger(param) {
 
 // 回复消息
 async function reply(messageId, content) {
-  console.log("content", content);
   try {
     return await client.im.message.reply({
       path: {
@@ -257,13 +256,7 @@ app.post("/", async (req, resp, context) => {
     msg.challenge = params.challenge;
     resp.json(msg);
   };
-  /* const callback = (msg)=>{
-    exports.handler = (req, resp, context) => {
-    console.log("receive body: ", req.body.toString());
-    resp.setHeader("Content-Type", "text/plain");
-    resp.send('<h1>Hello, world!</h1>');
-}
-  } */
+
   // 如果存在 encrypt 则说明配置了 encrypt key
   if (params.encrypt) {
     logger("user enable encrypt key");
@@ -301,6 +294,13 @@ app.post("/", async (req, resp, context) => {
       return;
     }
 
+    const replyMsg = async (question) => {
+      console.log("question:", question);
+      const openaiResponse = await getOpenAIReply(question);
+      console.log("openaiResponse:", openaiResponse);
+      await reply(messageId, openaiResponse);
+    };
+
     // 私聊直接回复
     if (params.event.message.chat_type === "p2p") {
       // 不是文本消息，不处理
@@ -313,12 +313,8 @@ app.post("/", async (req, resp, context) => {
       // 是文本消息，直接回复
       const userInput = JSON.parse(params.event.message.content);
       const question = userInput.text.replace("@_user_1", "");
-      const replyMsg = async () => {
-        // console.log("=======replyMsg=======");
-        const openaiResponse = await getOpenAIReply(question);
-        await reply(messageId, openaiResponse);
-      };
-      replyMsg();
+
+      replyMsg(question);
       callback({ code: 0 });
       return;
     }
@@ -342,8 +338,7 @@ app.post("/", async (req, resp, context) => {
       }
       const userInput = JSON.parse(params.event.message.content);
       const question = userInput.text.replace("@_user_1", "");
-      const openaiResponse = await getOpenAIReply(question);
-      await reply(messageId, openaiResponse);
+      replyMsg(question);
       callback({ code: 0 });
       return;
     }
