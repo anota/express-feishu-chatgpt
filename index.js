@@ -318,7 +318,7 @@ app.post("/", async (req, resp, context) => {
         const openaiResponse = await getOpenAIReply(question);
         await reply(messageId, openaiResponse);
       };
-      await replyMsg();
+      replyMsg();
       callback({ code: 0 });
       return;
     }
