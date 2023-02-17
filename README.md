@@ -25,25 +25,29 @@ https://user-images.githubusercontent.com/13283837/217905601-6e1ff237-5275-4deb-
 
 
 ### 3.clone项目并安装依赖环境
+```
 git clone https://github.com/anota/express-feishu-chatgpt#clone项目到本地服务器
 cd ~/express-feishu-chatgpt#进入项目目录
 npm install#安装npm
 npm install @larksuiteoapi/node-sdk#安装飞书lark依赖
 npm install axios#安装axios依赖
 npm install pm2@latest -g#安装PM2管理
+```
 
 
 ### 4. 配置js环境变量
-vi index.js
-
-修改const FEISHU_APP_ID = process.env.APPID || "飞书的应用 ID"; // 
+`-vi index.js`
+```
+const FEISHU_APP_ID = process.env.APPID || "飞书的应用 ID"; // 
 const FEISHU_APP_SECRET = process.env.SECRET || "飞书的应用的 Secret"; // 
 const FEISHU_BOTNAME = process.env.BOTNAME || "飞书机器人的名字"; // 不能是中文
 const OPENAI_KEY = process.env.KEY || "OpenAI 的 APIKey"; // 
-修改完成按ESC，输入 :wq保存配置
+```
+-修改完成按ESC，输入:wq保存配置
 
 ### 5.启动nodejs服务
-pm2 start index.js#服务运行在后台，端口9000；测试服务是否启动，浏览器输入IP:9000,返回成功提示即可
+
+`pm2 start index.js#服务运行在后台，端口9000；测试服务是否启动，浏览器输入IP:9000,返回成功提示即可`
 
 
 ### 6. 开启权限并配置事件
@@ -61,7 +65,7 @@ pm2 start index.js#服务运行在后台，端口9000；测试服务是否启动
 
 复制服务器调用地址。
 
-IP:9000#自行设置反代或添加证书
+-IP:9000#自行设置反代或添加证书
 
 然后回到事件订阅界面，添加事件。
 
