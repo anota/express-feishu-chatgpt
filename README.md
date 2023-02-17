@@ -24,33 +24,19 @@ https://user-images.githubusercontent.com/13283837/217905601-6e1ff237-5275-4deb-
 
 
 
-### 3.clone项目并安装依赖环境
+### 3.启动项目(懒癌版)
+
+如有需要,可自行根据 dockerfile 文件打包自己的镜像.
+
 ```
-git clone https://github.com/anota/express-feishu-chatgpt#clone项目到本地服务器
-cd ~/express-feishu-chatgpt#进入项目目录
-npm install#安装npm
-npm install @larksuiteoapi/node-sdk#安装飞书lark依赖
-npm install axios#安装axios依赖
-npm install pm2@latest -g#安装PM2管理
+git clone https://github.com/anota/express-feishu-chatgpt   #clone项目到本地服务器
+cd express-feishu-chatgpt  #进入项目目录
+vim docker-compose.yml  #修改为你的密钥信息
+docker-compose up -d #后台启动
 ```
 
 
-### 4. 配置js环境变量
-`-vi index.js`
-```
-const FEISHU_APP_ID = process.env.APPID || "飞书的应用 ID"; // 
-const FEISHU_APP_SECRET = process.env.SECRET || "飞书的应用的 Secret"; // 
-const FEISHU_BOTNAME = process.env.BOTNAME || "飞书机器人的名字"; // 不能是中文
-const OPENAI_KEY = process.env.KEY || "OpenAI 的 APIKey"; // 
-```
--修改完成按ESC，输入:wq保存配置
-
-### 5.启动nodejs服务
-
-`pm2 start index.js#服务运行在后台，端口9000；测试服务是否启动，浏览器输入IP:9000,返回成功提示即可`
-
-
-### 6. 开启权限并配置事件
+### 4. 开启权限并配置事件
 
 访问开放平台页面，开通如下 6 个权限：
 
@@ -71,7 +57,7 @@ const OPENAI_KEY = process.env.KEY || "OpenAI 的 APIKey"; //
 
 ![image-20230210022720552](https://postimg.aliavv.com/picgo/202302100227786.png)
 
-### 7. 发布版本，等待审核
+### 5. 发布版本，等待审核
 
 上述这些都配置完成后，你的机器人就配置好了，接下来只需要在飞书开放平台后台找到应用发布，创建一个全新的版本并发布版本即可。
 

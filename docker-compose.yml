@@ -1,0 +1,15 @@
+# Author: jonnyan404
+# update: 2023-02-17 20:36:18
+version: '3.0'
+services:
+    chatgpt:
+        container_name: chatgpt
+        ports:
+            - '9000:9000'
+        environment:
+            - APPID=cli_xxxxx     #应用ID
+            - SECRET=Mxxxxxxxxxx  #应用secret
+            - BOTNAME=chatgpt     #机器人名字,必须英文
+            - KEY=sk-xxxxxx       #openai的key
+        #restart: always
+        image: jonnyan404/chatgpt
