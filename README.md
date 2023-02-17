@@ -24,29 +24,27 @@ https://user-images.githubusercontent.com/13283837/217905601-6e1ff237-5275-4deb-
 
 
 
-### 3.clone本项目到服务器中，npm install安装所需依赖
+### 3.clone项目并安装依赖环境
+git clone https://github.com/anota/express-feishu-chatgpt#clone项目到本地服务器
+cd ~/express-feishu-chatgpt#进入项目目录
+npm install#安装npm
+npm install @larksuiteoapi/node-sdk#安装飞书lark依赖
+npm install axios#安装axios依赖
+npm install pm2@latest -g#安装PM2管理
 
 
+### 4. 配置js环境变量
+vi index.js
 
-### 4. 配置环境变量
+修改const FEISHU_APP_ID = process.env.APPID || "飞书的应用 ID"; // 
+const FEISHU_APP_SECRET = process.env.SECRET || "飞书的应用的 Secret"; // 
+const FEISHU_BOTNAME = process.env.BOTNAME || "飞书机器人的名字"; // 不能是中文
+const OPENAI_KEY = process.env.KEY || "OpenAI 的 APIKey"; // 
+修改完成按ESC，输入 :wq保存配置
 
-接下来我们来配置环境变量，你需要配置三个环境变量 `APPID` 、`SECRET` 和 `BOTNAME`，APPID 填写你刚刚在飞书开放平台获取的 APPID，SECRET 填写你在飞书开放平台获取到的 SECRET，BOTNAME 填写你的机器人的名字。
+### 5.启动nodejs服务
+pm2 start index.js#服务运行在后台，端口9000；测试服务是否启动，浏览器输入IP:9000,返回成功提示即可
 
-> 配置环境变量可能会失败，可以多 deploy 几次，确保配置成功。
-
-![image-20230210013355689](https://postimg.aliavv.com/picgo/202302100133798.png)
-
-配置完成后，服务器执行`node index.js`启动服务
-
-### 5. 获取 OpenAI 的 KEY ，并配置环境变量
-
-访问 [Account API Keys - OpenAI API](https://platform.openai.com/account/api-keys) ，点击这里的 Create new secret key ，创建一个新的 key ，并保存备用。
-
-![image-20230210013702015](https://postimg.aliavv.com/picgo/202302100137078.png)
-
-重新回到 Aircode， 配置一个名为 `KEY` 的环境变量，并填写你刚刚生成的 Key 。配置完成后，点击部署使其生效。
-
-![image-20230210022322720](https://postimg.aliavv.com/picgo/202302100223839.png)
 
 ### 6. 开启权限并配置事件
 
@@ -63,7 +61,7 @@ https://user-images.githubusercontent.com/13283837/217905601-6e1ff237-5275-4deb-
 
 复制服务器调用地址。
 
-![image-20230210022628784](https://postimg.aliavv.com/picgo/202302100226846.png)
+IP:9000#自行设置反代或添加证书
 
 然后回到事件订阅界面，添加事件。
 
@@ -95,17 +93,10 @@ https://user-images.githubusercontent.com/13283837/217905601-6e1ff237-5275-4deb-
 
 确保 6 项开放平台权限都已经开通且已经发布版本，权限进入可用状态。
 
-另一情况是飞书机器人名称与 BOTNAME 变量不一致。由于 aircode 的环境变量**不支持中文**，如果机器人名称为中文也会造成部署失败。
+另一情况是飞书机器人名称与 BOTNAME 变量不一致。由于环境变量**不支持中文**，如果机器人名称为中文也会造成部署失败。
 
 解决办法：修改飞书机器人的名称为英文，或直接修改代码中的 BOTNAME 值。
 
-### 3. aircode 提示报错 failed to obtain token?
-
-说明你的 aircode 的环境变量配置没成功，可以重新配置一下，然后再部署一下。
-
-### 4. cannot set propoertis of undefined (setting 'event_type')?
-
-说明你用 HTTP 发起请求 / 或者用了 aircode 的 debug 功能，是正常现象。
 
 ## LICENSE
 
