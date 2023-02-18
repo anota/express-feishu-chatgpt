@@ -1,0 +1,15 @@
+[
+  {
+    "script": "index.js",
+    "log_date_format": "YYYY-MM-DD HH:mm:ss",
+    "error_file": "./logs/pm2_error.log",
+    "out_file": "./logs/pm2_out.log",
+    "pid_file": "./logs/pm2_node.pid",
+    "env": {
+      "APPID": "",
+      "SECRET": "",
+      "BOTNAME": "",
+      "KEY": ""
+    }
+  }
+]

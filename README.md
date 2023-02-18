@@ -22,21 +22,33 @@ https://user-images.githubusercontent.com/13283837/217905601-6e1ff237-5275-4deb-
 
 ![image-20230210012110735](https://postimg.aliavv.com/picgo/202302100121008.png)
 
-
-
-### 3.启动项目(懒癌版)
+### 3.docker 方式启动项目
 
 如有需要,可自行根据 dockerfile 文件打包自己的镜像.
 
 ```
 git clone https://github.com/anota/express-feishu-chatgpt   #clone项目到本地服务器
 cd express-feishu-chatgpt  #进入项目目录
-vim docker-compose.yml  #修改为你的密钥信息
+vi docker-compose.yml  #修改为你的密钥信息
 docker-compose up -d #后台启动
 ```
 
+### 4. nodejs 方式启动项目
 
-### 4. 开启权限并配置事件
+```
+git clone https://github.com/anota/express-feishu-chatgpt#clone项目到本地服务器
+cd ~/express-feishu-chatgpt#进入项目目录
+npm install#安装npm
+npm install pm2@latest -g#安装PM2管理
+vi processes.json #修改为你的密钥信息
+FEISHU_APP_ID "飞书的应用 ID"; //
+FEISHU_APP_SECRET "飞书的应用的 Secret"; //
+FEISHU_BOTNAME "飞书机器人的名字"; // 不能是中文
+OPENAI_KEY "OpenAI 的 APIKey"; //
+pm2 start processes.json
+```
+
+### 5. 开启权限并配置事件
 
 访问开放平台页面，开通如下 6 个权限：
 
@@ -57,7 +69,7 @@ docker-compose up -d #后台启动
 
 ![image-20230210022720552](https://postimg.aliavv.com/picgo/202302100227786.png)
 
-### 5. 发布版本，等待审核
+### 6. 发布版本，等待审核
 
 上述这些都配置完成后，你的机器人就配置好了，接下来只需要在飞书开放平台后台找到应用发布，创建一个全新的版本并发布版本即可。
 
@@ -86,7 +98,6 @@ docker-compose up -d #后台启动
 另一情况是飞书机器人名称与 BOTNAME 变量不一致。由于环境变量**不支持中文**，如果机器人名称为中文也会造成部署失败。
 
 解决办法：修改飞书机器人的名称为英文，或直接修改代码中的 BOTNAME 值。
-
 
 ## LICENSE
 

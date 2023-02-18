@@ -1,7 +1,7 @@
 {
-  "name": "chatgpt-feishu",
+  "name": "express-feishu-chatgpt",
   "version": "1.0.0",
-  "description": "飞书chatgpt函数服务",
+  "description": "飞书chatgpt订阅服务",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -21,7 +21,7 @@
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "sqlite": "^4.1.2",
-    "sqlite3": "^5.1.4",
+    "sqlite3": "^5.0.2",
     "util": "^0.12.5"
   }
 }

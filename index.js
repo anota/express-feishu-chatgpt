@@ -4,7 +4,7 @@ const axios = require("axios");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const port = 9000;
+const port = process.env.PROT || 9000;
 const sqlite3 = require("sqlite3");
 const sqlite = require("sqlite");
 
@@ -221,6 +221,7 @@ const checkHasEvent = async (eventId) => {
     const rows = await db.all(
       `SELECT count(*) as count FROM ${tableName} WHERE event_id = '${eventId}'`
     );
+    console.log("events count:", rows[0]);
     if (rows[0].count > 0) {
       return true;
     }
